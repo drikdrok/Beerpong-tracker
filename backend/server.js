@@ -100,7 +100,19 @@ function setStats(req, res){
             wins: newStats.wins,
 
         }
+    }, (err, result) => {
+        if (err){
+            throw err;
+            res.status(400).send("Data not saved!");
+
+        } 
+        if (result.modifiedCount < 1) {
+            res.status(400).send("Data not saved!");
+            console.log("Error: ", result);
+        }
+
+        res.status(200).send("Good");
+        return;
     });
     
-    res.status(200).send();
 }

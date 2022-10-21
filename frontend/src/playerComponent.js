@@ -35,6 +35,8 @@ export class PlayerComponent extends React.Component {
             gamesPlayed: props.player.gamesPlayed,
             wins: props.player.wins,
 
+            error: false
+
         }
 
     }
@@ -54,7 +56,10 @@ export class PlayerComponent extends React.Component {
             wins: this.state.wins,
         }
 
-        axios.post("http://localhost:8080/setStats", { newStats: newStats })
+        axios.post("http://localhost:8080/setStats", { newStats: newStats }).catch((err)=>{
+            this.setState({error: true});
+            throw err;
+        })
     }
 
     async addCup(amount) {
@@ -133,6 +138,8 @@ export class PlayerComponent extends React.Component {
     render() {
         return (
             <tr id={this.state._id}>
+                {this.state.error && 
+                <div className="error"><h1>DATA HAS NOT BEEN SAVED!!!</h1></div>}
                 <td>
                     {this.state.name}
                 </td>

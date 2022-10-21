@@ -59,3 +59,7 @@ tr:nth-child(even) {
   display: flex;
   justify-content: space-between;
 }
+
+.error{
+  background-color: red;
+}
