@@ -53,6 +53,7 @@ app.listen(PORT, () => {
 
 app.get("/getStats", getStats);
 app.post("/setStats", setStats);
+app.post("/newPlayer", newPlayer);
 
 
 function getStats(req, res){
@@ -63,6 +64,23 @@ function getStats(req, res){
     });
 }
 
+function newPlayer(req, res){
+    _db.collection("22/23").insertOne({name: req.body.name,
+        cupsMade: 0,
+        sameCups: 0,
+        islands: 0,
+        redemptions: 0,
+        finalCups: 0,
+        bitchCups: 0,
+        titties: 0,
+        blows: 0,
+        gamesPlayed: 0,
+        wins: 0,});
+
+    console.log("Added new player: ", req.body.name);
+    res.status(200).send("Player added");
+}
+
 function setStats(req, res){
     let newStats = req.body.newStats;
 
@@ -70,12 +88,12 @@ function setStats(req, res){
 
     _db.collection("22/23").updateOne({ _id: ObjectId(newStats._id) }, {
         $set: {
-            cups: newStats.cups,
+            cupsMade: newStats.cupsMade,
             sameCups: newStats.sameCups,
             islands: newStats.islands,
             redemptions: newStats.redemptions,
             finalCups: newStats.finalCups,
-            bitchCups: newStats.phoneNumber,
+            bitchCups: newStats.bitchCups,
             titties: newStats.titties,
             blows: newStats.blows,
             gamesPlayed: newStats.gamesPlayed,
@@ -83,5 +101,6 @@ function setStats(req, res){
 
         }
     });
+    
     res.status(200).send();
 }

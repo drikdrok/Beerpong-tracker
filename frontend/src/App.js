@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import { PlayerComponent } from "./playerComponent";
 
+
 function App() {
 
     const [players, setPlayers] = useState([]);
@@ -31,25 +32,26 @@ function App() {
             <table>
                 <thead>
 
-                <tr>
-                    <th>Name</th>
-                    <th>Cups made</th>
-                    <th>Same Cups</th>
-                    <th>Islands</th>
-                    <th>Redemptions</th>
-                    <th>Final Cups</th>
-                    <th>Bitch Cups</th>
-                    <th>Titties</th>
-                    <th>Blows</th>
-                    <th>Games Played</th>
-                    <th>Wins</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cups made</th>
+                        <th>Same Cups</th>
+                        <th>Islands</th>
+                        <th>Redemptions</th>
+                        <th>Final Cups</th>
+                        <th>Bitch Cups</th>
+                        <th>Titties</th>
+                        <th>Blows</th>
+                        <th>Games Played</th>
+                        <th>Wins</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
-                        players.map(player => {
+                        players.sort(function(a, b) {
+                            return a.name.localeCompare(b.name);}).map(player => {
                             return (
-                                    <PlayerComponent player={player}></PlayerComponent>
+                                <PlayerComponent player={player}></PlayerComponent>
                             );
                         })
                     }
@@ -58,7 +60,48 @@ function App() {
 
             </table>
 
+            <button onClick={async () => {
+                let name = prompt("Enter player name");
+                await axios.post('http://localhost:8080/newPlayer', { name: name });
+                window.location.reload();
+            }}>Add player</button>
+            <br/>
+            <h1>Statistics</h1>
+            <h2>Cups / Game</h2>
+            <ol>
+                {
+                    players.sort(function(a,b){
+                        if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed){
+                            return 1;
+                        }else if (a.cupsMade / a.gamesPlayed > b.cupsMade / b.gamesPlayed){
+                            return -1;
+                        }
+                        return a.name.localeCompare(b.name);
+                    }).map(player =>{
+                        return (
+                            <li>{player.name}: {(player.cupsMade / player.gamesPlayed).toFixed(2)}</li>
+                        );
+                    })
+                }
+            </ol>
 
+            <h2>Win %</h2>
+            <ol>
+                {
+                    players.sort(function(a,b){
+                        if (a.wins / a.gamesPlayed < b.wins / b.gamesPlayed){
+                            return 1;
+                        }else if (a.wins / a.gamesPlayed > b.wins / b.gamesPlayed){
+                            return -1;
+                        }
+                        return a.name.localeCompare(b.name);
+                    }).map(player =>{
+                        return (
+                            <li>{player.name}: {(player.wins / player.gamesPlayed).toFixed(2) * 100}%</li>
+                        );
+                    })
+                }
+            </ol>
 
         </div>
     );
