@@ -131,6 +131,7 @@ export class PlayerComponent extends React.Component {
     async win(action) {
         await this.setState({
             wins: this.state.wins + 1 * action,
+            gamesPlayed: this.state.gamesPlayed + 1 * action
         });
         this.postStats();
     }
