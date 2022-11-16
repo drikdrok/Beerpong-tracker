@@ -70,7 +70,9 @@ function App() {
             <h2>Cups / Game</h2>
             <ol>
                 {
-                    players.sort(function(a,b){
+                    players.filter(obj => {
+                        return obj.gamesPlayed >= 10;
+                      }).sort(function(a,b){
                         if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed){
                             return 1;
                         }else if (a.cupsMade / a.gamesPlayed > b.cupsMade / b.gamesPlayed){
@@ -88,7 +90,9 @@ function App() {
             <h2>Win %</h2>
             <ol>
                 {
-                    players.sort(function(a,b){
+                    players.filter(obj => {
+                        return obj.gamesPlayed >= 10;
+                      }).sort(function(a,b){
                         if (a.wins / a.gamesPlayed < b.wins / b.gamesPlayed){
                             return 1;
                         }else if (a.wins / a.gamesPlayed > b.wins / b.gamesPlayed){
