@@ -3,8 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const database = "fall22-playoffs"
+
 var corsOptions = {
-    origin: ["http://localhost:8081", "https://jlog-frontend.herokuapp.com/"]
+    origin: ["http://localhost:8081"]
 };
 
 app.use(cors());
@@ -57,7 +59,7 @@ app.post("/newPlayer", newPlayer);
 
 
 function getStats(req, res){
-    _db.collection("22/23").find({}).toArray(function (err, result) {
+    _db.collection(database).find({}).toArray(function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
         //res.status(200).send(result);
@@ -65,7 +67,7 @@ function getStats(req, res){
 }
 
 function newPlayer(req, res){
-    _db.collection("22/23").insertOne({name: req.body.name,
+    _db.collection(database).insertOne({name: req.body.name,
         cupsMade: 0,
         sameCups: 0,
         islands: 0,
@@ -86,7 +88,7 @@ function setStats(req, res){
 
     console.log("Set stats: ", newStats);
 
-    _db.collection("22/23").updateOne({ _id: ObjectId(newStats._id) }, {
+    _db.collection(database).updateOne({ _id: ObjectId(newStats._id) }, {
         $set: {
             cupsMade: newStats.cupsMade,
             sameCups: newStats.sameCups,

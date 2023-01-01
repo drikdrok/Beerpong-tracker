@@ -26,7 +26,7 @@ function App() {
 
     return (
         <div>
-            <h1>Beer Pong Tracker</h1>
+            <h1>Beer Pong Tracker - Fall 22 Playoffs</h1>
 
 
             <table>
@@ -48,8 +48,9 @@ function App() {
                 </thead>
                 <tbody>
                     {
-                        players.sort(function(a, b) {
-                            return a.name.localeCompare(b.name);}).map(player => {
+                        players.sort(function (a, b) {
+                            return a.name.localeCompare(b.name);
+                        }).map(player => {
                             return (
                                 <PlayerComponent player={player}></PlayerComponent>
                             );
@@ -65,48 +66,147 @@ function App() {
                 await axios.post('http://localhost:8080/newPlayer', { name: name });
                 window.location.reload();
             }}>Add player</button>
-            <br/>
-            <h1>Statistics</h1>
-            <h2>Cups / Game</h2>
-            <ol>
-                {
-                    players.filter(obj => {
-                        return obj.gamesPlayed >= 10;
-                      }).sort(function(a,b){
-                        if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed){
-                            return 1;
-                        }else if (a.cupsMade / a.gamesPlayed > b.cupsMade / b.gamesPlayed){
-                            return -1;
-                        }
-                        return a.name.localeCompare(b.name);
-                    }).map(player =>{
-                        return (
-                            <li>{player.name}: {(player.cupsMade / player.gamesPlayed).toFixed(2)}</li>
-                        );
-                    })
-                }
-            </ol>
+            <br />
+            <h1 align="center">Statistics</h1>
+            <div class="stats">
+                <div id="stat">
 
-            <h2>Win %</h2>
-            <ol>
-                {
-                    players.filter(obj => {
-                        return obj.gamesPlayed >= 10;
-                      }).sort(function(a,b){
-                        if (a.wins / a.gamesPlayed < b.wins / b.gamesPlayed){
-                            return 1;
-                        }else if (a.wins / a.gamesPlayed > b.wins / b.gamesPlayed){
-                            return -1;
+                    <h2>Cups / Game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.cupsMade / a.gamesPlayed > b.cupsMade / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.cupsMade / player.gamesPlayed).toFixed(2)}</li>
+                                );
+                            })
                         }
-                        return a.name.localeCompare(b.name);
-                    }).map(player =>{
-                        return (
-                            <li>{player.name}: {(player.wins / player.gamesPlayed).toFixed(2) * 100}%</li>
-                        );
-                    })
-                }
-            </ol>
+                    </ol>
+                </div>
+                <div id="stat">
 
+                    <h2>Win %</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.wins / a.gamesPlayed < b.wins / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.wins / a.gamesPlayed > b.wins / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.wins / player.gamesPlayed).toFixed(2) * 100}%</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div id="stat">
+
+                    <h2>Islands/game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.islands / a.gamesPlayed < b.islands / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.islands / a.gamesPlayed > b.islands / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.islands / player.gamesPlayed).toFixed(2)}</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+
+                <div id="stat">
+
+                    <h2>Redemptions/game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.redemptions / a.gamesPlayed < b.redemptions / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.redemptions / a.gamesPlayed > b.redemptions / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.redemptions / player.gamesPlayed).toFixed(2)}</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+                <div id="stat">
+
+                    <h2>Final Cups/game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.finalCups / a.gamesPlayed < b.finalCups / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.finalCups / a.gamesPlayed > b.finalCups / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.finalCups / player.gamesPlayed).toFixed(2)}</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+
+                <div id="stat">
+
+                    <h2>Titties/game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1;
+                            }).sort(function (a, b) {
+                                if (a.titties / a.gamesPlayed < b.titties / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.titties / a.gamesPlayed > b.titties / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.titties / player.gamesPlayed).toFixed(2)}</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+            </div>
         </div>
     );
 }
