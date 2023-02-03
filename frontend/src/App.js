@@ -26,7 +26,7 @@ function App() {
 
     return (
         <div>
-            <h1>Beer Pong Tracker - Fall 22 Playoffs</h1>
+            <h1>Beer Pong Tracker - Winter 23</h1>
 
 
             <table>
@@ -75,7 +75,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed) {
                                     return 1;
@@ -97,7 +97,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.wins / a.gamesPlayed < b.wins / b.gamesPlayed) {
                                     return 1;
@@ -122,7 +122,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.islands / a.gamesPlayed < b.islands / b.gamesPlayed) {
                                     return 1;
@@ -145,7 +145,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.redemptions / a.gamesPlayed < b.redemptions / b.gamesPlayed) {
                                     return 1;
@@ -167,7 +167,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.finalCups / a.gamesPlayed < b.finalCups / b.gamesPlayed) {
                                     return 1;
@@ -190,7 +190,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1;
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
                             }).sort(function (a, b) {
                                 if (a.titties / a.gamesPlayed < b.titties / b.gamesPlayed) {
                                     return 1;

@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-const database = "fall22-playoffs"
+const database = "winter23"
 
 var corsOptions = {
     origin: ["http://localhost:8081"]
