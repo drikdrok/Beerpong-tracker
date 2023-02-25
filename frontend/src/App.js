@@ -6,6 +6,12 @@ import React, { useState, useEffect } from 'react';
 
 import { PlayerComponent } from "./playerComponent";
 
+let filterPeopleOut = [
+    "Casper",
+    "Anne Marie",
+    "Pablo"
+]
+
 
 function App() {
 
@@ -48,7 +54,9 @@ function App() {
                 </thead>
                 <tbody>
                     {
-                        players.sort(function (a, b) {
+                        players.filter(obj=>{
+                            return !filterPeopleOut.includes(obj.name);
+                        }).sort(function (a, b) {
                             return a.name.localeCompare(b.name);
                         }).map(player => {
                             return (
@@ -75,7 +83,7 @@ function App() {
                     <ol>
                         {
                             players.filter(obj => {
-                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie" ;
                             }).sort(function (a, b) {
                                 if (a.cupsMade / a.gamesPlayed < b.cupsMade / b.gamesPlayed) {
                                     return 1;
@@ -108,6 +116,28 @@ function App() {
                             }).map(player => {
                                 return (
                                     <li>{player.name}: {(player.wins / player.gamesPlayed).toFixed(2) * 100}%</li>
+                                );
+                            })
+                        }
+                    </ol>
+                </div>
+                <div id="stat">
+
+                    <h2>Same cups/game</h2>
+                    <ol>
+                        {
+                            players.filter(obj => {
+                                return obj.gamesPlayed >= 1 && obj.name != "Casper"  && obj.name != "Anne Marie";
+                            }).sort(function (a, b) {
+                                if (a.sameCups / a.gamesPlayed < b.sameCups / b.gamesPlayed) {
+                                    return 1;
+                                } else if (a.sameCups / a.gamesPlayed > b.sameCups / b.gamesPlayed) {
+                                    return -1;
+                                }
+                                return a.name.localeCompare(b.name);
+                            }).map(player => {
+                                return (
+                                    <li>{player.name}: {(player.sameCups / player.gamesPlayed).toFixed(2)}</li>
                                 );
                             })
                         }
